@@ -1,0 +1,35 @@
+{% extends "base.twig" %}
+
+{% block title %}Overzicht Bestellingen{% endblock %}
+
+{% block content %}
+    {% if error_message %}
+        <div class="error-message">
+            {{ error_message }}
+        </div>
+    {% endif %}
+    
+    {% if success_message %}
+        <div class="success-message">
+            {{ success_message }}
+        </div>
+    {% endif %}
+    <div class="title"> 
+    <h1>Overzicht Bestellingen</h1>
+    </div>
+    <p>U {{ userOrdersDetail[0].user }} bestelde het volgende:</p>
+    
+    {% for orderDetail in userOrdersDetail %}
+        {% for sandwichDetail in orderDetail.orders %}
+            <p>U bestelde een {{ sandwichDetail.sandwich }} broodje met
+                {% if sandwichDetail.fillings|length > 0 %}
+                    {{ sandwichDetail.fillingsListString }}.
+                {% else %}
+                    geen beleg.
+                {% endif %}
+            </p>
+            <p>Broodje Totaal: €{{ '%.2f'|format(sandwichDetail.sandwichTotal) }}</p>
+        {% endfor %}
+        <p>Eind Totaal: €{{ '%.2f'|format(orderDetail.grandTotal) }}</p>
+    {% endfor %}
+{% endblock %}

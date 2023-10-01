@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="title">
+    <h1>Login<h1>
+  </div>
+<form method="POST" action="login.php">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <label for="password">Wachtwoord:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button type="submit" name="btnLogin">Login</button>
+</form>
+{% if error %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="title">
+    <h1>Registreer<h1>
+  </div>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+{% if error %}
+    <span style="color:red;">{{ error }}</span>
+{% endif %}
+{% if not user %}
+<form action="{{ php_self }}" method="POST">
+    Email address: <input type="email" name="txtEmail"><br>
+    <button type="submit" name="btnRegister">Registreer</button>
+</form>
+{% endif %}
+{% endblock %}

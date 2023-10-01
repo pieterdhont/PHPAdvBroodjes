@@ -1,0 +1,53 @@
+{% extends "base.twig" %}
+
+{% block title %}Bestel{% endblock %}
+
+{% block content %}
+<form method="POST" action="">
+    <input type="hidden" name="action" value="add_to_basket"> <!-- This is the line to be added -->
+    <label for="sandwich" class="label-title">Kies een Sandwich:</label>
+    <select id="sandwich" name="sandwich">
+        {% for id, sandwich in sandwiches %}
+            <option value="{{ id }}">{{ sandwich.getName() }} - €{{ sandwich.getPrice()|number_format(2) }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <br>
+    <label class="label-title">Kies Beleg:</label>
+    <br>
+    {% for id, filling in fillings %}
+        <input type="checkbox" id="filling{{ id }}" name="fillings[]" value="{{ id }}">
+        <label for="filling{{ id }}">{{ filling.getName() }} - €{{ filling.getPrice()|number_format(2) }}</label><br>
+    {% endfor %}
+    <button type="submit">Voeg toe aan mandje 🧺 </button>
+</form>
+<ul>
+    {% for item in basket %}
+        <li class="basket-item">
+            <div class="basket-text">
+                {{ item.name }} met {{ item.fillings }} - €{{ item.total|number_format(2) }}
+            </div>
+            <form method="POST" action="" class="basket-form">
+                <input type="hidden" name="action" value="remove">
+                <input type="hidden" name="index" value="{{ item.index }}">
+                <button type="submit">Verwijder 🗑️</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% if basket|length > 0 %}
+    <form method="POST" action="" class="total-price-form">
+        <div class="label-button-container">
+            <label class="label-title">Totaalprijs: €{{ totaalPrijs|number_format(2) }}</label>
+            <input type="hidden" name="action" value="placeOrder">
+            <button type="submit">Plaats Bestelling 🧾 </button>
+        </div>
+    </form>
+{% else %}
+    <div class="total-price-container">
+        <label class="label-title">Totaalprijs: €{{ totaalPrijs|number_format(2) }}</label>
+    </div>
+{% endif %}
+{% endblock %}
+
+
