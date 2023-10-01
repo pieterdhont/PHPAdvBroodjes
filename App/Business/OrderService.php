@@ -19,18 +19,18 @@ class OrderService
     private OrderDAO $orderDAO;
     private OrderSandwichDAO $orderSandwichDAO;
     private OrderFillingDAO $orderFillingDAO;
-    private SandwichService $sandwichService;
+   
 
     public function __construct(
         OrderDAO $orderDAO,
         OrderSandwichDAO $orderSandwichDAO,
         OrderFillingDAO $orderFillingDAO,
-        SandwichService $sandwichService
+        
     ) {
         $this->orderDAO = $orderDAO;
         $this->orderSandwichDAO = $orderSandwichDAO;
         $this->orderFillingDAO = $orderFillingDAO;
-        $this->sandwichService = $sandwichService;
+        
     }
 
 
@@ -146,10 +146,9 @@ class OrderService
         $orderSandwichDAO = new OrderSandwichDAO($orderDAO, $sandwichDAO);
         $fillingDAO = new FillingDAO();
         $orderFillingDAO = new OrderFillingDAO($orderSandwichDAO, $fillingDAO);
-        $fillingService = new FillingService($fillingDAO);
-        $sandwichService = new SandwichService($fillingService, $sandwichDAO);
-
-        return new OrderService($orderDAO, $orderSandwichDAO, $orderFillingDAO, $sandwichService);
+        
+        
+        return new OrderService($orderDAO, $orderSandwichDAO, $orderFillingDAO);
     }
 
 
