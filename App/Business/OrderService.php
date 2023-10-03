@@ -82,12 +82,14 @@ class OrderService
         // Enable error reporting
         // ini_set('display_errors', 1);
         // ini_set('display_startup_errors', 1);
-        // error_reporting(E_ALL);
-        /*
+         //error_reporting(E_ALL);
+		echo '<script type="text/javascript">alert("' . 'placeOrder' . '")</script>';
+        
         try {
+		echo '<script type="text/javascript">alert("' . 'Try' . '")</script>';
             $this->orderDAO->beginTransaction();
             echo "Transaction Started"; // Debug statement
-        */
+        echo '<script type="text/javascript">alert("' . 'Transaction started' . '")</script>';
 
         $orderId = $this->orderDAO->insertOrder($userId);
 
@@ -98,6 +100,7 @@ class OrderService
             
             if (!$orderSandwichId) {
                 echo "Failed to insert OrderSandwich"; // Debug statement
+				echo '<script type="text/javascript">alert("' . 'Failed to insert OrderSandwich' . '")</script>';
                 
                 return -1;
             }
@@ -110,21 +113,25 @@ class OrderService
                 
                 if (!$orderFillingInserted) {
                     echo "Failed to insert OrderFilling"; // Debug statement
+					
+					echo '<script type="text/javascript">alert("' . 'Failed to insert OrderFilling' . '")</script>';
                     
                     return -1;
                 }
             }
         }
-        /*
+        
             $this->orderDAO->commit();
             echo "Transaction Committed"; // Debug statement
+			echo '<script type="text/javascript">alert("' . 'Transaction Committed' . '")</script>';
         } catch (Exception $e) {
             $this->orderDAO->rollBack();
             echo "Transaction Rolled Back due to: " . $e->getMessage(); // Debug statement
+			echo '<script type="text/javascript">alert("' . 'Transaction Rolled Back due to: ' . '")</script>';
             
             return -1;
         }
-        */
+        
 
         return $orderId;
     }
