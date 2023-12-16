@@ -38,14 +38,14 @@
 {% if basket|length > 0 %}
     <form method="POST" action="" class="total-price-form">
         <div class="label-button-container">
-            <label class="label-title">Totaalprijs: €{{ totaalPrijs|number_format(2) }}</label>
+            <label class="label-title">Totaalprijs: €{{ totalPrice|number_format(2) }}</label>
             <input type="hidden" name="action" value="placeOrder">
             <button type="submit">Plaats Bestelling 🧾 </button>
         </div>
     </form>
 {% else %}
     <div class="total-price-container">
-        <label class="label-title">Totaalprijs: €{{ totaalPrijs|number_format(2) }}</label>
+        <label class="label-title">Totaalprijs: €{{ totalPrice|number_format(2) }}</label>
     </div>
 {% endif %}
 {% endblock %}
